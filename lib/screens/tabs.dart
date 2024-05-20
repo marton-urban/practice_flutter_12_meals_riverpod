@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meals/providers/filtered_meals_provider.dart';
 
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/filters.dart';
@@ -47,10 +46,10 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final availableMeals = ref.watch(filteredMealsProvider);
+    ref.watch(filtersProvider);
 
     Widget activePage = CategoriesScreen(
-      availableMeals: availableMeals,
+      availableMeals: ref.read(filtersProvider.notifier).getFilteredMeals(),
     );
     var activePageTitle = 'Categories';
 
